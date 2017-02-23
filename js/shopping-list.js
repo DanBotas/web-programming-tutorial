@@ -7,17 +7,26 @@ function getRow(produs, cantitate){
         '</tr>';
 }
 
-
-var shoppingList = [
-    {nume: 'Paine', cantitate: 1},
-    {nume: ' Suc', cantitate: 3},
-    {nume: ' Mere', cantitate: 10}
-];
-
-var lista = '';
-for(var i = 0; i < shoppingList.length; i++){
-    var produs = shoppingList[i];
-   lista += getRow(produs.nume, produs.cantitate);
+function showList(shoppingList) {
+    var lista = '';
+    for(var i = 0; i < shoppingList.length; i++){
+        var produs = shoppingList[i];
+        lista += getRow(produs.nume, produs.cantitate);
+    }
+    document.getElementsByTagName('tbody')[0].innerHTML = lista;
 }
-document.getElementsByTagName('tbody')[0].innerHTML = lista;
+
+$.ajax('js/mocks/shopping-list.json', {
+    success:function(shoppingList){
+        console.info(shoppingList);
+        showList(shoppingList);
+    }
+});
+console.debug('after ajax');
+
+var shoppingList = [];
+
+showList(shoppingList);
+
+
 
